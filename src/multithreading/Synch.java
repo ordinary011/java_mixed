@@ -14,18 +14,31 @@ public class Synch {
         }catch (InterruptedException e){
             System.out.println("Interrupted");
         }
+        System.out.println("finished all of the threads");
     }
 }
 
 class Callme {
+//    synchronized void call(String msg){
     void call(String msg){
-        System.out.println("[ " + msg);
+        System.out.print("[" + msg);
         try {
             Thread.sleep(1000);
         }catch (InterruptedException e){
             System.out.println("interrupted");
         }
         System.out.println("]");
+    }
+
+//    synchronized void func(String msg){
+    void func(String msg){
+        System.out.println("in func for word: " + msg);
+        try {
+            Thread.sleep(1000);
+        }catch (InterruptedException e){
+            System.out.println("interrupted");
+        }
+        System.out.println("func for word: " + msg + " is finished");;
     }
 }
 
@@ -42,6 +55,9 @@ class Caller implements Runnable {
     }
 
     public void run(){
-        target.call(msg);
+        synchronized (target){
+            target.call(msg);
+            target.func(msg);
+        }
     }
 }
