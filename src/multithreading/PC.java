@@ -36,7 +36,7 @@ class Q {
         }
         this.n = n;
         valueSet = true;
-        System.out.println("Putting: " + n);
+        System.out.println("put: " + n);
         notify();
     }
 }
